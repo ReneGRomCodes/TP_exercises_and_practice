@@ -8,13 +8,13 @@ seconds = 42
 answer = minutes * 60 + seconds
 print(answer)
 
-# Alternative solution including user input:
+# Expanded solution including user input:
 minutes = int(input("Enter minutes: "))
 seconds = int(input("Enter seconds: "))
 answer = minutes * 60 + seconds
 print(answer)
 
-# Another alternative using different input format:
+# Alternative using different input format:
 t = input("Enter time in mm:ss format: ")
 minutes_seconds = t.split(":")
 answer = int(minutes_seconds[0]) * 60 + int(minutes_seconds[1])
