@@ -8,6 +8,7 @@ r = 5
 v = (4 / 3) * math.pi * r**3
 print(v)
 
+
 # 2. Suppose the cover price of a book is $24.95, but bookstores get a 40% discount. Shipping cost $3 for the first copy
 # and 75 cents for each additional copy. What is the total wholesale cost for 60 copies?
 
@@ -20,6 +21,7 @@ n_copies = 60
 cost = discounted_price * n_copies + shipping_cost_1 + (n_copies-1)*shipping_cost_2
 print(cost)
 print(f"{cost:.2f}")  # Output formatted to two decimal places.
+
 
 # 3. If I leave my house at 6:52am and run 1 mile at an easy pace (8:15 per mile), then 3 miles at tempo (7:12 per mile)
 # and 1 mile at an easy pace again, what time do I get home for breakfast?
