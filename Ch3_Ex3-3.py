@@ -29,9 +29,12 @@ def draw_grid_four():
 # Alternative solution, letting the user chose the number of rows and columns.
 
 def draw_grid_alt():
+    """Take user input 'n_rows' and 'n_columns' to build a grid."""
     n_rows = int(input("Enter number of rows: "))
     n_columns = int(input("Enter number of columns: "))
+    # Build horizontal and vertical lines.
     horizontal_row = "+----" * n_columns + "+"
     vertical_row = "|    " * n_columns + "|"
+    # Build and print the grid.
     grid = (horizontal_row + "\n" + 4 * (vertical_row + "\n")) * n_rows + horizontal_row
     print(grid)
