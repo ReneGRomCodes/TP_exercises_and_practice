@@ -21,6 +21,7 @@ import math
 
 
 def mysqrt(a):
+    """Find square root of 'a' and return 'x' using Newton's method"""
     x = 3
     while True:
         y = (x + a / x) / 2
@@ -30,6 +31,8 @@ def mysqrt(a):
 
 
 def test_square_root():
+    """Find square root of all integers between 1 and 9 using 'mysqrt' and 'math.sqrt' function, compare the output and
+    print a table with the output values."""
     header = "a   mysqrt(a)     math.sqrt(a)  diff"
     divider ="-   ---------     ------------  ----"
     print(header + "\n" + divider)
@@ -53,6 +56,7 @@ print("\n")
 
 
 def mysqrt_abs(a):
+    """Find square root of 'a' and return 'x' using Newton's method"""
     x = 3
     epsilon = 0.0000001
     while True:
@@ -63,6 +67,8 @@ def mysqrt_abs(a):
 
 
 def test_square_root_abs():
+    """Find square root of all integers between 1 and 9 using 'mysqrt' and 'math.sqrt' function, compare the output and
+        print a table with the output values."""
     header = "a   mysqrt(a)     math.sqrt(a)  diff"
     divider ="-   ---------     ------------  ----"
     print(header + "\n" + divider)
