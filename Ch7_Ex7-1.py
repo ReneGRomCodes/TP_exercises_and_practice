@@ -31,7 +31,8 @@ def mysqrt(a):
 
 def test_square_root():
     header = "a   mysqrt(a)     math.sqrt(a)  diff"
-    print(header)
+    divider ="-   ---------     ------------  ----"
+    print(header + "\n" + divider)
 
     a = 1
     for i in range(9):
@@ -63,7 +64,8 @@ def mysqrt_abs(a):
 
 def test_square_root_abs():
     header = "a   mysqrt(a)     math.sqrt(a)  diff"
-    print(header)
+    divider ="-   ---------     ------------  ----"
+    print(header + "\n" + divider)
 
     a = 1
     for i in range(9):
