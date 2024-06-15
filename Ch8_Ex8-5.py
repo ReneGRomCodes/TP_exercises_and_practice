@@ -5,4 +5,24 @@
 # converts numeric codes to characters. But beware: numeric code for uppercase letters are different.
 
 def rotate_word(s, n):
-    pass
+    """Take string 's' and rotate it by 'n' number of places through the alphabet."""
+    encoded_s = ""
+    for letter in s:
+        encoded_letter = (chr(ord(letter) + n))
+        encoded_s += encoded_letter
+
+    return encoded_s
+
+
+# Alternative letting the user input a string and a value for 'n'.
+def rotate_word_user():
+    """Take user input 's' and rotate it by user input 'n' number of places through the alphabet."""
+    s = str(input("Enter a string to encode: "))
+    n = int(input("Enter a number for encryption: "))
+
+    encoded_s = ""
+    for letter in s:
+        encoded_letter = (chr(ord(letter) + n))
+        encoded_s += encoded_letter
+
+    return encoded_s
