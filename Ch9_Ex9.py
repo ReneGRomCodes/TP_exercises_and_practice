@@ -54,8 +54,26 @@ def avoids(s1, s2):
     # Remove separators and spaces from 's2' to avoid incorrect 'True' value returned.
     s2 = s2.replace(",", "").replace(" ", "")
 
+    flag = True
     for letter in s2:
         if letter.lower() not in s1.lower():
-            return True
+            continue
+        else:
+            return False
 
-    return False
+    return flag
+
+
+def avoids_user():
+    """Prompt the user for a string of 'forbidden letters' and check words 'Ch9_words.txt' for occurrence. Print the
+    amount of words not containing the 'forbidden letters'."""
+    forbidden_letters = input("Enter series of 'forbidden letters': ")
+    # Start counter with value of 0.
+    word_count = 0
+
+    with open("Ch9_words.txt") as f:
+        for line in f:
+            if avoids(line, forbidden_letters):
+                word_count += 1
+
+    print(word_count)
