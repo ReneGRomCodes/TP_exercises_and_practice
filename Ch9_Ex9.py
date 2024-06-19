@@ -17,26 +17,26 @@ def print_words_20_char():
 
 def has_no_e(s):
     """Check string 's' for occurrences of the letter 'e' and returns 'True' if absent and 'False' if not."""
-    if "e" not in s.lower():  #
+    if "e" not in s.lower():
         return True
     else:
         return False
 
 
 def print_no_e():
-    """Check 'Ch9_words.txt' for without the letter 'e' and print them."""
+    """Check 'Ch9_words.txt' for without the letter 'e', print them and calculate the percentage of words without the
+    letter 'e'."""
     with open("Ch9_words.txt") as f:
         # Declare starting values for word count variables.
         word_count = 0
         word_count_no_e = 0
 
-        for _ in f:
-            word = f.readline().strip()
+        for line in f:
             word_count += 1
+            word = line.strip()
             if has_no_e(word):  # Use of function 'has_no_e' check for truthiness.
                 word_count_no_e += 1
                 print(word)
 
+    print(word_count)
     print(f"The percentage of words without the letter 'e' is {word_count_no_e / word_count * 100:.2f}%.")
-
-
