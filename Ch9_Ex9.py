@@ -51,17 +51,16 @@ def print_no_e():
 def avoids(s1, s2):
     """Check if string 's1' contains any letters contained in string 's2' and return 'True' if no letter from 's2' are
     found in 's1'."""
-    # Remove separators and spaces from 's2' to avoid incorrect 'True' value returned.
+    # Remove separators and spaces from 's2' to avoid incorrect return value.
     s2 = s2.replace(",", "").replace(" ", "")
 
-    flag = True
     for letter in s2:
         if letter.lower() not in s1.lower():
             continue
         else:
             return False
 
-    return flag
+    return True
 
 
 def avoids_user():
@@ -77,3 +76,51 @@ def avoids_user():
                 word_count += 1
 
     print(word_count)
+
+
+# Exercise 9-4: Write a function named 'uses_only' that takes a word and a string of letters, and that returns 'True'
+# if the word contains only letters in the list.
+
+def uses_only(s1, s2):
+    pass
+
+
+# Exercise 9-5: Write a function named 'uses_all' that takes a word and a string of letters, and that returns 'True'
+# if the word uses all the required letters at least once. How many words are there that use all the vowels 'aeiou? How
+# about 'aeiouy'?
+
+def uses_all(s1, s2):
+    """Check if string 's1' contains all letters in string 's2' and return 'True' if all letters from 's2' are found in
+    's1'."""
+    # Remove separators and spaces from 's2' to avoid incorrect return value.
+    s2 = s2.replace(",", "").replace(" ", "")
+
+    for letter in s2:
+        if letter.lower() in s1.lower():
+            continue
+        else:
+            return False
+
+    return True
+
+
+# Check for words that use 'aeiou' and 'aeiouy'.
+word_count_1 = 0
+word_count_2 = 0
+
+with open("Ch9_words.txt") as f:
+    for line in f:
+        if uses_all(line, "aeiou"):
+            word_count_1 += 1
+            if uses_all(line, "y"):
+                word_count_2 += 1
+
+
+print(f"There are {word_count_1} words that use 'AEIOU' and {word_count_2} that use 'AEIOUY'.")
+
+
+# Exercise 9-6: Write a function called 'is_abecedarian' that returns 'True' if the letters in a word appear in
+# alphabetical order (double letters are okay). How many abecedarian words are there?
+
+def is_abecedarian(word):
+    pass
