@@ -4,8 +4,8 @@
 def print_words_20_char():
     """Check 'Ch9_words.txt' for words with more than 20 characters and print them."""
     with open("Ch9_words.txt") as f:
-        for _ in f:
-            word = f.readline().strip()
+        for line in f:
+            word = line.strip()
             if len(word) >= 20:
                 print(word)
 
@@ -40,3 +40,22 @@ def print_no_e():
 
     print(word_count)
     print(f"The percentage of words without the letter 'e' is {word_count_no_e / word_count * 100:.2f}%.")
+
+
+# Exercise 9-3: Write a function named 'avoids' that takes a word and a string of letters, and that returns 'True' if
+# the word doesn't use any of the forbidden letters.
+# Modify your program to prompt the user to enter a string of forbidden letters and then print the number of words that
+# don't contain any of them. Can you find a combination of five forbidden letters that excludes the smallest number of
+# words?
+
+def avoids(s1, s2):
+    """Check if string 's1' contains any letters contained in string 's2' and return 'True' if no letter from 's2' are
+    found in 's1'."""
+    # Remove separators and spaces from 's2' to avoid incorrect 'True' value returned.
+    s2 = s2.replace(",", "").replace(" ", "")
+
+    for letter in s2:
+        if letter.lower() not in s1.lower():
+            return True
+
+    return False
