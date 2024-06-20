@@ -144,3 +144,46 @@ def is_abecedarian(word):
                 return False
 
     return True
+
+
+# Exercise 9-7: Car Talk Puzzler (see book).
+
+def find_word():
+    """Find and print all words with three consecutive double letters in 'Ch9_words.txt'."""
+    with open("Ch9_words.txt") as f:
+        for line in f:
+            n = 0
+            while n < (len(line) - 5):
+                if line[n] == line[n+1] and line[n+2] == line[n+3] and line[n+4] == line[n+5]:
+                    print(line)
+                n += 1
+
+
+# Exercise 9-8: Car Talk Puzzler (see book).
+
+def is_palindrome(x):
+    """Check if string 'x' is palindrome."""
+    if x == x[::-1]:
+        return True
+    else:
+        return False
+
+
+def odometer_palindrome_puzzle():
+    """Yeah, I'm not even trying to explain what this one does... just read the "Car Talk Puzzler" in the book ;) """
+
+    for i in range(0, 1_000_000):
+        first_odo_reading = "{:06d}".format(i)
+        odo_display = "{:06d}".format(i)
+
+        if is_palindrome(odo_display[-4:]):
+            odo_display = "{:06d}".format(i+1)
+
+            if is_palindrome(odo_display[-5:]):
+                odo_display = "{:06d}".format(i+2)
+
+                if is_palindrome(odo_display[1:4]):
+                    odo_display = "{:06d}".format(i+3)
+
+                    if is_palindrome(odo_display[::]):
+                        print(first_odo_reading)
