@@ -82,7 +82,18 @@ def avoids_user():
 # if the word contains only letters in the list.
 
 def uses_only(s1, s2):
-    pass
+    """Check if string 's1' contains only letters in string 's2' and return 'False' if any letters not found in 's2' are
+    used in 's1'."""
+    # Remove separators and spaces from 's2' to avoid incorrect return value.
+    s2 = s2.replace(",", "").replace(" ", "")
+
+    for letter in s1:
+        if letter.lower() in s2.lower():
+            continue
+        else:
+            return False
+
+    return True
 
 
 # Exercise 9-5: Write a function named 'uses_all' that takes a word and a string of letters, and that returns 'True'
