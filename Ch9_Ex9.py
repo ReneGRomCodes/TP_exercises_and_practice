@@ -134,4 +134,13 @@ print(f"There are {word_count_1} words that use 'AEIOU' and {word_count_2} that 
 # alphabetical order (double letters are okay). How many abecedarian words are there?
 
 def is_abecedarian(word):
-    pass
+    """Check string 'word' for alphabetical order of its characters. Return 'True' if alphabetical."""
+    # Convert 'word' to lowercase to ensure case-insensitive comparison considering 'ord()' function.
+    word = word.lower()
+
+    for i in range(len(word)):
+        for j in range(i+1, len(word)):
+            if ord(word[i]) > ord(word[j]):
+                return False
+
+    return True
