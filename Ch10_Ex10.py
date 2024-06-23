@@ -57,8 +57,12 @@ def cumsum(t):
 # middle(t)
 # [2, 3]
 
+list = [1, 2, 3, 4]
+
 def middle(t):
-    pass
+    """Take list 't', remove first and last element and return new list 'new_list'."""
+    new_list = list[1:-1]
+    return new_list
 
 
 # Exercise 10-4: Write a function called 'chop' that takes a list, modifies it by removing the first and last elements,
@@ -70,8 +74,11 @@ def middle(t):
 # print(t)
 # [2, 3]
 
+list = [1, 2, 3, 4]
+
 def chop(t):
-    pass
+    """Take list 't' and remove first and last element."""
+    del t[0], t[-1]
 
 
 # Exercise 10-5: Write a function called 'is_sorted' that takes a list as a parameter and return 'True' if the list is
@@ -84,7 +91,10 @@ def chop(t):
 # False
 
 def is_sorted(t):
-    pass
+    """Check if list 't' is sorted in ascending order and return 'True' if so, 'False' if not."""
+    if t == sorted(t):
+        return True
+    return False
 
 
 # Exercise 10-6: Write a function called 'is_anagram' that takes two strings and returns 'True' if they are anagrams.
