@@ -246,6 +246,41 @@ def find_reverse_pair(t):
             index += 1
 
 
+# Expanded solution giving out constant status output on number of words searched and number of reverse pairs found,
+# before printing a final output with the overall number of reverse pairs, how many of those are palindromes (as special
+# cases of reverse pairs) and returns a list with each pair as item in "item - reverse_item" format.
+# It is a bit clunky with the constant status output (I decided against clearing the screen every time) and hilariously
+# slow, but I wanted to experiment a bit with it... so don't look at me like that ;)
+def find_reverse_pair_expanded(t):
+    pair_list = []
+    word_counter = 0
+    pair_counter = 0
+    palindrome_counter = 0
+    index = 0
+
+    while index < len(t):
+        for item in t:
+            word_counter += 1
+            reverse_item = item[::-1]
+
+            if binary_search(reverse_item, t[index:]):
+                if item <= reverse_item:
+                    pair = item + " - " + reverse_item
+                    pair_list.append(pair)
+                    pair_counter += 1
+                    if item == reverse_item:
+                        palindrome_counter += 1
+
+            print(f"Words searched: {word_counter}")
+            print(f"Reverse pairs found: {pair_counter}\n")
+
+            index += 1
+
+    print(f"Out of {word_counter}, a total of {pair_counter} reverse pairs have been found, {palindrome_counter} of "
+          f"them are palindromes.")
+    return pair_list
+
+
 # Exercise 10-12 Two words "interlock" if taking alternating letters from each form a new word. For example, 'shoe" and
 # 'cold' interlock to form 'schooled'.
 # 1. Write a program that find all pairs of words that interlock.
