@@ -153,9 +153,49 @@ def has_duplicates_expanded(t):
 # samples of 23 birthdays and checking for matches.
 
 
+group_size = 23
+
+
+def birthday_paradox_exp(n):
+    """Take group size 'n' and print approximate probability in % of two people in the group share the same birthday,
+    using simple exponentiation."""
+    exp = (n * (n-1)) / 2
+    probability = (1 - (364/365)**exp) * 100
+    message = (f"The probability that two people within a group of {n} share the same birthday is approximately "
+               f"{probability:.2f}%.")
+    print(message)
+
+
 # Exercise 10-9: Write a function that reads the words.txt file from chapter 9 (CH9_words.txt) and build a list with one
 # element per word. Write two versions of the function, one using the 'append' method and other using the idiom
-# 't=t+[x]. Which one takes longer to run and why?
+# 't=t+[x]'. Which one takes longer to run and why?
+
+word_file = "Ch9_words.txt"
+
+
+# Using Append method.
+def build_word_list_1(file):
+    """Take text file 'file' and add every line as item into and return list 'word_list_1'."""
+    word_list_1 = []
+    with open(file) as f:
+        for line in f:
+            word_list_1.append(line.strip())
+
+    return word_list_1
+
+
+# Using the idiom 't=t+[x]'.
+def build_word_list_2(file):
+    word_list_2 = []
+    with open(file) as f:
+        for line in f:
+            word_list_2 += [line.strip()]
+
+    return word_list_2
+
+
+# Answer: using the '.append' method is faster because concatenation creates a new list for each item, while '.append'
+# simply adds a new item to the already existing list.
 
 
 # Exercise 10-10: To check whether a word is in the word list, you could use the 'in' operator, but it would be slow,
