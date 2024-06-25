@@ -152,7 +152,6 @@ def has_duplicates_expanded(t):
 # what are the chances that two of you have the same birthday? You can estimate this probability by generating random
 # samples of 23 birthdays and checking for matches.
 
-
 group_size = 23
 
 
@@ -202,11 +201,49 @@ def build_word_list_2(file):
 # because it searches through the words in order. Because the words are in order, we can speed things up with a
 # bisection search (aka 'binary search').
 # Write a function called 'in_bisect' that takes a sorted list and a target value and returns the index of the value in
-# the list if it's there, or 'None' if it's not.
+# the list if it's there, or 'False' if it's not.
+
+# Making use of the variable 'word_file' and the function 'build_word_list_1()' as defined in the previous exercise.
+
+word_list = build_word_list_1(word_file)
+
+
+def binary_search(word, t):
+    """Search for string 'word' in list 't' using binary search. Return 'True' if word is found, 'False if not."""
+    # Check if list is empty.
+    if len(t) == 0:
+        return False
+
+    t_bisect = len(t) // 2
+
+    if t[t_bisect] == word:
+        return True
+    elif word < t[t_bisect]:
+        return binary_search(word, t[:t_bisect])
+    else:
+        return binary_search(word, t[t_bisect + 1:])
 
 
 # Exercise 10-11: Two words are a "reverse pair" if each is the reverse of the other. Write a program that finds all the
 # reverse pairs in the word list.
+
+# Making use of the list 'word_list' and the function 'binary_search()' as defined in the previous exercise.
+
+def find_reverse_pair(t):
+    """Search through list 't' for "reverse pairs" and print them."""
+
+    # Declaring an index value mainly for the use in the function call of 'binary_search()', letting the function start
+    # the search from the index of the last item checked, of instead searching through the list from the start every
+    # time. Therefor speeding up the process, especially towards the end.
+    index = 0
+
+    while index < len(t):
+        for item in t:
+            reverse_item = item[::-1]
+            if binary_search(reverse_item, t[index:]):
+                if item <= reverse_item:
+                    print(item, reverse_item)
+            index += 1
 
 
 # Exercise 10-12 Two words "interlock" if taking alternating letters from each form a new word. For example, 'shoe" and
