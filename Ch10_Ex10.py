@@ -146,3 +146,31 @@ def has_duplicates_expanded(t):
             print(f"The items '{multi_item_s}' and '{multi_item_last}' appear multiple times.")
     else:
         print("Every item appears only once.")
+
+
+# Exercise 10-8: This exercise pertains to the so-called 'Birthday Paradox'. If there are 23 students in your class,
+# what are the chances that two of you have the same birthday? You can estimate this probability by generating random
+# samples of 23 birthdays and checking for matches.
+
+
+# Exercise 10-9: Write a function that reads the words.txt file from chapter 9 (CH9_words.txt) and build a list with one
+# element per word. Write two versions of the function, one using the 'append' method and other using the idiom
+# 't=t+[x]. Which one takes longer to run and why?
+
+
+# Exercise 10-10: To check whether a word is in the word list, you could use the 'in' operator, but it would be slow,
+# because it searches through the words in order. Because the words are in order, we can speed things up with a
+# bisection search (aka 'binary search').
+# Write a function called 'in_bisect' that takes a sorted list and a target value and returns the index of the value in
+# the list if it's there, or 'None' if it's not.
+
+
+# Exercise 10-11: Two words are a "reverse pair" if each is the reverse of the other. Write a program that finds all the
+# reverse pairs in the word list.
+
+
+# Exercise 10-12 Two words "interlock" if taking alternating letters from each form a new word. For example, 'shoe" and
+# 'cold' interlock to form 'schooled'.
+# 1. Write a program that find all pairs of words that interlock.
+# 2. Can you find any words that are three-way interlocked; that is, every third letter forms a word, starting from the
+#    first, second or third.
