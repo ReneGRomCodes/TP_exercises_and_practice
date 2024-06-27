@@ -304,7 +304,7 @@ def search_interlocking_words(t):
 
 def search_three_interlocking_words(t):
     """Find interlocked words that can be constructed from three words in list 't', then add them to and return new list
-    'interlocking_words'."""
+    'three_interlocking_words'."""
     three_interlocking_words = []
 
     for word in t:
