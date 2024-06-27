@@ -299,6 +299,8 @@ def search_interlocking_words(t):
         if binary_search(word_1, t) and binary_search(word_2, t):
             interlocking_words.append([word_1, word_2, word])
 
+    # Following line added out of curiosity how many interlocking word pairs would be found (it's 1254 btw.).
+    # print(len(interlocking_words))
     return interlocking_words
 
 
@@ -314,4 +316,6 @@ def search_three_interlocking_words(t):
         if binary_search(word_1, t) and binary_search(word_2, t) and binary_search(word_3, t):
             three_interlocking_words.append([word_1, word_2, word_3, word])
 
+    # Following line added out of curiosity how many interlocking word triplets would be found (it's 560 btw.).
+    # print(len(three_interlocking_words))
     return three_interlocking_words
