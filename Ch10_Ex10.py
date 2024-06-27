@@ -285,4 +285,33 @@ def find_reverse_pair_expanded(t):
 # 'cold' interlock to form 'schooled'.
 # 1. Write a program that find all pairs of words that interlock.
 # 2. Can you find any words that are three-way interlocked; that is, every third letter forms a word, starting from the
-#    first, second or third.
+#    first, second or third?
+
+# Making use of the list 'word_list' and the function 'binary_search()' as defined in the exercise 10-10.
+
+def search_interlocking_words(t):
+    """Find interlocked words in list 't', then add them to and return new list 'interlocking_words'."""
+    interlocking_words = []
+
+    for word in t:
+        word_1 = word[0::2]
+        word_2 = word[1::2]
+        if binary_search(word_1, t) and binary_search(word_2, t):
+            interlocking_words.append([word_1, word_2, word])
+
+    return interlocking_words
+
+
+def search_three_interlocking_words(t):
+    """Find interlocked words that can be constructed from three words in list 't', then add them to and return new list
+    'interlocking_words'."""
+    three_interlocking_words = []
+
+    for word in t:
+        word_1 = word[0::2]
+        word_2 = word[1::2]
+        word_3 = word[2::2]
+        if binary_search(word_1, t) and binary_search(word_2, t) and binary_search(word_3, t):
+            three_interlocking_words.append([word_1, word_2, word_3, word])
+
+    return three_interlocking_words
