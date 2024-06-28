@@ -2,6 +2,29 @@
 # doesn't matter what the values are. Then you use the in operator as a fast way to check whether a string is in the
 # dictionary.
 
+words = "Ch9_words.txt"
+
+
+def build_words_dict(t):
+    """Build a dictionary from txt file 't', return the lines as keys and the length of the lines as values."""
+    words_dict = dict()
+
+    with open(t) as f:
+        for line in f:
+            words_dict[line[:-1]] = len(line) - 1  # [:-1] and -1 to remove the '\n' at the end of each line in file.
+
+    return words_dict
+
+
+def find_word(s, t):
+    """Search for string 's' (case-insensitive) in dictionary build from txt file 't' and output message."""
+    search_words_dict = build_words_dict(t)
+
+    if s.lower() in search_words_dict:
+        print(f"The word '{s.upper()}' is in the dictionary with the assigned value {search_words_dict[s]}.")
+    else:
+        print(f"The word '{s.upper()}' is not in the dictionary.")
+
 
 # Exercise 11-2: Read the documentation of the dictionary method 'setdefault' and use it to write a more concise version
 # of 'invert_dict'.
