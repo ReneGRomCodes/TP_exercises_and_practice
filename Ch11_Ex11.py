@@ -29,15 +29,50 @@ def find_word(s, t):
 # Exercise 11-2: Read the documentation of the dictionary method 'setdefault' and use it to write a more concise version
 # of 'invert_dict'.
 
+def invert_dict(d):
+    """Take dictionary 'd' and return new dictionary 'inverse', where 'd's key-value-pairs are inverted."""
+    inverse = dict()
+
+    for key in d:
+        val = d[key]
+        inverse.setdefault(val, []).append(key)
+
+    return inverse
+
 
 # Exercise 11-3: Memoize the Ackermann function from exercise 6-2 and see if memoization makes it possible to evaluate
 # the function with bigger arguments.
+
+# Function copied from exercise 6-2:
+def ack(m, n):
+    if m == 0:
+        return n + 1
+    elif m > 0 and n == 0:
+        return ack(m-1, 1)
+    elif m > 0 and n > 0:
+        return ack(m-1, ack(m, n-1))
 
 
 # Exercise 11-4: If you did exercise 10-7, you already have a function named 'has_duplicates' that takes a list as a
 # parameter and returns 'True' if there is any object that appears more than once in the list. Use a dictionary to write
 # a faster, simpler version of 'has_duplicates'.
 
+def has_duplicates(t):
+    """Take a list 't' and return 'True' if any element appear more than once."""
+    t2 = sorted(t)
+    index = 0
+
+    for i in range(len(t2)):
+        if t2[index] == t2[index-1]:
+            return True
+        else:
+            index += 1
+
+    return False
+
 
 # Exercise 11-5: Two words are "rotate pairs" if you can rotate one of them and get the other. Write a program that
 # reads a wordlist and finds all the rotate pairs.
+
+def find_rotate_pairs(file):
+    pass
