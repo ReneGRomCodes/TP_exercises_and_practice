@@ -2,8 +2,17 @@
 # of frequency. Find text samples from several different languages and see how letter frequency varies between
 # languages.
 
-def most_frequent(s):
-    pass
+def most_frequent(text):
+    """Take a string 'text' and print the letters in decreasing order of frequency."""
+    d = {}
+
+    for s in text:
+        if s.isalpha():
+            s = s.lower()
+            d[s] = 1 + d.get(s, 0)
+
+    for (y, z) in reversed(sorted(zip(d.values(), d.keys()))):
+        print("'{}': {:.3f}%".format(z, (y / len(text)) * 100))
 
 
 # Exercise 12-2: More anagrams!
