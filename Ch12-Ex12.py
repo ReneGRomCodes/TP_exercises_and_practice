@@ -98,8 +98,35 @@ def find_most_scrabble_bingos(file):
 # Exercise 12-3: Two words form a "metathesis pair" if you can transform one into the other by swapping two letters; for
 # example, "converse" and "conserve". Write a program that finds all the metathesis pairs in the dictionary.
 
-def find_metathesis_pair(file):
-    pass
+def calculate_difference(word1, word2):
+    """Calculate the number of different characters in 'word1' and 'word2'."""
+    if len(word1) != len(word2):
+        raise ValueError("Words must be the same length.")
+
+    diff = 0
+    for x, y in zip(word1, word2):
+        if x != y:
+            diff += 1
+
+    return diff
+
+
+def find_metathesis_pairs(file):
+    """Take words from file 'file' and return a list of metathesis pairs 'word_pairs'."""
+
+    # make anagrams
+    anagrams = find_anagrams(file)
+
+    word_pairs = []
+
+    # cycle through the tuples of anagrams and pull out words which only differ by two letters.
+    for length, letter, ana in anagrams:
+        for i in range(len(ana)):
+            for j in range(i + 1, len(ana)):
+                if calculate_difference(ana[i], ana[j]) == 2:
+                    word_pairs.append([ana[i], ana[j]])
+
+    return word_pairs
 
 
 # Exercise 12-4: View the book for the full "Car Talk Puzzler".
@@ -112,3 +139,5 @@ def find_metathesis_pair(file):
 # 3. The wordlist I provided, "Ch9_words.txt", doesn't contain single letter words. So you might want to add "I", "a"
 #    and the empty string.
 # 4. To improve the performance of your program, you might want to memoize the words that are known to be reducible.
+
+# TODO I'll come back to this one later. Turns out to be way more complicated than I first thought.
