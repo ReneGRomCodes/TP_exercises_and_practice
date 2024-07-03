@@ -1,3 +1,8 @@
+# I Struggled a bit with the following exercises, so I relied heavily on the solutions from GitHub user STRZGR
+# (https://github.com/STRZGR) to figure them out. His solutions are more comprehensive than the ones here, so I
+# recommend checking out his repository on "Think Python": https://github.com/STRZGR/ThinkPython
+
+
 # Exercise 12-1: Write a function called 'most_frequent' that takes a string and prints the letters in decreasing order
 # of frequency. Find text samples from several different languages and see how letter frequency varies between
 # languages.
