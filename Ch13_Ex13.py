@@ -68,6 +68,19 @@ def count_words(text_list):
 
 # Exercise 13-3: Modify the program from the previous exercise to print the 20 most frequently used words in the book.
 
+def n_most_common_words(text, encode="utf8"):
+    """Return a list of the 20 most common words in a "Project Gutenberg" text."""
+
+    words = get_words_2(text, encode)
+    tally = count_words(words)
+
+    sorted_words = []
+
+    for (y, z) in reversed(sorted(zip(tally.values(), tally.keys()))):
+        sorted_words.append([z, y])
+
+    return sorted_words[:20]
+
 
 # Exercise 13-4: Modify the previous program to read a word list (use 'Ch9_words.txt') and then print all the words in
 # the book that are not in the word list. How many of them are typos? How many of them are common words that should be
