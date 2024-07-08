@@ -3,7 +3,7 @@
 import string
 
 
-def get_words_from_file(text, encode="utf8"):
+def get_words(text, encode="utf8"):
     """Return a list of words from file 'text'. Default text encoding is "utf8"."""
     punct = string.punctuation
 
@@ -26,6 +26,44 @@ def get_words_from_file(text, encode="utf8"):
 # Then modify the program to count the total number of words in the book and the number of times each word is used.
 # Print the number of different words used in the book. Compare different books by different authors, written in
 # different eras. Which author uses the most extensive vocabulary?
+
+def get_words_2(text, encode="utf8"):
+    """Return a list of words from file 'text'. Default text encoding is "utf8". Adjusted to work with text files from
+    "Project Gutenberg"."""
+
+    stripped = string.punctuation
+
+    stripped += string.whitespace
+
+    opened_text = open(text, 'r', encoding=encode)
+    t = []
+    flag = False
+    start = "*** START OF"
+    end = "*** END OF"
+
+    for line in opened_text:
+
+        # start reading in lines after boilerplate
+        if start in line and flag == False:
+            flag = True
+
+        # return word list once boilerplate has been reached
+        elif end in line and flag == True:
+            return t
+        else:
+            pass
+
+    return t
+
+
+def count_words(text_list):
+    """Take list 'text_list' and return a tally in dictionary 'tally_words'."""
+    tally_words = {}
+
+    for word in text_list:
+        tally_words[word] = 1 + tally_words.get(word, 0)
+
+    return tally_words
 
 
 # Exercise 13-3: Modify the program from the previous exercise to print the 20 most frequently used words in the book.
