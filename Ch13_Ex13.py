@@ -1,5 +1,22 @@
 # Exercise 13-1: Write a program that reads a file, breaks each line into words, strips whitespace and punctuation from
 # the words and converts them to lowercase.
+import string
+
+
+def get_words_from_file(text, encode="utf8"):
+    """Return a list of words from file 'text'. Default text encoding is "utf8"."""
+    punct = string.punctuation
+
+    out = " " * len(punct)
+
+    opened_text = open(text, 'r', encoding=encode)
+    t = []
+    for line in opened_text:
+        translation = line.maketrans(punct, out)
+        for word in line.translate(translation).split():
+            t.append(word.strip().lower())
+
+    return t
 
 
 # Exercise 13-2: Go to Project Gutenberg (http://gutenberg.org) and download your favorite out-of-copyright book in
