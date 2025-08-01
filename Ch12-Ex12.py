@@ -31,9 +31,8 @@ def sort_letters(s):
 
 def find_anagrams(file):
     """Take text from 'file' and return list of tuples of anagrams.
-    First item: number of anagrams formed.
-    Seconds item: letters used.
-    Third item: anagrams.
+    RETURNS:
+        anagrams
     """
 
     sorted_dict = {}
@@ -114,12 +113,12 @@ def calculate_difference(word1, word2):
 def find_metathesis_pairs(file):
     """Take words from file 'file' and return a list of metathesis pairs 'word_pairs'."""
 
-    # make anagrams
+    # Make anagrams.
     anagrams = find_anagrams(file)
 
     word_pairs = []
 
-    # cycle through the tuples of anagrams and pull out words which only differ by two letters.
+    # Cycle through the tuples of anagrams and pull out words which only differ by two letters.
     for length, letter, ana in anagrams:
         for i in range(len(ana)):
             for j in range(i + 1, len(ana)):

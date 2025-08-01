@@ -5,16 +5,16 @@
 
 # Only tests the first character and immediately returns 'True' or 'False'.
 def any_lowercase1(s):
-    for c in s:
-        if c.islower():
+    for character in s:
+        if character.islower():
             return True
         else:
             return False
 
 
-# Ignores the parameter and only checks if "c" in the 'ifs-statement' is lowercase, therefor always returns 'True'.
+# Ignores the parameter and only checks if "c" in the 'if-statement' is lowercase, therefor always returns 'True'.
 def any_lowercase2(s):
-    for c in s:
+    for character in s:
         if 'c'.islower():
             return True
         else:
@@ -23,8 +23,8 @@ def any_lowercase2(s):
 
 # Only tests the first character and immediately returns 'True' or 'False'.
 def any_lowercase3(s):
-    for c in s:
-        flag = c.islower()
+    for character in s:
+        flag = character.islower()
         return flag
 
 
@@ -32,15 +32,15 @@ def any_lowercase3(s):
 # before returning 'flag'
 def any_lowercase4(s):
     flag = False
-    for c in s:
-        flag = flag or c.islower()
+    for character in s:
+        flag = flag or character.islower()
     return flag
 
 
 # Only returns 'True' if all characters in 's' are lowercase. Returns 'False' as soon as one uppercase character is
 # found.
 def any_lowercase5(s):
-    for c in s:
-        if not c.islower():
+    for character in s:
+        if not character.islower():
             return False
     return True

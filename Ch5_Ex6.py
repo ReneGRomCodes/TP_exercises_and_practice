@@ -36,7 +36,7 @@ def koch(t, x):
 
 def snowflake(t, x):
     """Draw a snowflake using 3 Koch curves with length 'x'. 't' is a turtle."""
-    for i in range(3):
+    for _ in range(3):
         koch(t, x)
         t.rt(120)
 

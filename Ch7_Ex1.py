@@ -38,7 +38,7 @@ def test_square_root():
     print(header + "\n" + divider)
 
     a = 1
-    for i in range(9):
+    for _ in range(9):
         my_sqrt = mysqrt(a)
         math_sqrt = math.sqrt(a)
         diff = math_sqrt - my_sqrt
@@ -74,7 +74,7 @@ def test_square_root_abs():
     print(header + "\n" + divider)
 
     a = 1
-    for i in range(9):
+    for _ in range(9):
         my_sqrt = mysqrt_abs(a)
         math_sqrt = math.sqrt(a)
         diff = my_sqrt - math_sqrt

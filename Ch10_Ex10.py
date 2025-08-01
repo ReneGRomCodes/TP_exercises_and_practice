@@ -11,7 +11,7 @@ def nested_sum(t):
     final_sum = 0
     index = 0
 
-    for i in range(len(t)):
+    for _ in range(len(t)):
         final_sum += sum(t[index])
         index += 1
 
@@ -32,7 +32,7 @@ def cumsum(t):
     index = 0
     cumsum_list = []
 
-    for i in range(len(t)):
+    for _ in range(len(t)):
         if index == 0:
             sum = t[index]
             cumsum_list.append(sum)
@@ -102,7 +102,7 @@ def has_duplicates(t):
     t2 = sorted(t)
     index = 0
 
-    for i in range(len(t2)):
+    for _ in range(len(t2)):
         if t2[index] == t2[index-1]:
             return True
         else:
@@ -122,7 +122,7 @@ def has_duplicates_expanded(t):
 
     multi_item = []
 
-    for i in range(len(t2)):
+    for _ in range(len(t2)):
         if t2[index].lower() == t2[index - 1].lower():
 
             # Make sure that items that are found to be multiples appear only once in 'multi_item' list.
@@ -209,7 +209,7 @@ word_list = build_word_list_1(word_file)
 
 
 def binary_search(word, t):
-    """Search for string 'word' in list 't' using binary search. Return 'True' if word is found, 'False if not."""
+    """Search for string 'word' in list 't' using binary search. Return 'True' if word is found, 'False' if not."""
     # Check if list is empty.
     if len(t) == 0:
         return False

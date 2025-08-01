@@ -8,7 +8,7 @@ import math
 def arc(t, r, angle):
     """Draw an arc length 'angle' from a circle with radius 'r'. 't' is a turtle."""
     step = (2 * math.pi * r) / 360
-    for i in range(angle):
+    for _ in range(angle):
         t.fd(step)
         t.lt(1)
 
@@ -16,8 +16,8 @@ def arc(t, r, angle):
 def draw_flower(t, n_petals, len_petals, angle):
     """Draw a flower pattern with number of petals 'n_petals', length of petals 'len_petals' and width of the petal
     'angle'. 't' is a turtle."""
-    for i in range(n_petals):
-        for i in range(2):
+    for _ in range(n_petals):
+        for _ in range(2):
             arc(t, len_petals, angle)
             t.lt(180 - angle)
         t.lt(360 / n_petals)
@@ -42,7 +42,7 @@ def draw_triangle(t, a, angle_a):
 
 def draw_shape(t, r, n_sides):
     """Take radius 'r' and number of sides 'n_sides' to draw a polygon. 't' is a turtle."""
-    for i in range(n_sides):
+    for _ in range(n_sides):
         draw_triangle(t, r, 360/n_sides)
         t.lt(180)
 
@@ -147,13 +147,11 @@ def draw_r(t):
 def draw_spiral(t, n, length=3, a=0.1, b=0.0002):
     """Draw an Archimedian spiral.
 
-    Args:
+    ARGS:
         n: how many line segments to draw
         length: how long each segment is
-        a: how loose the initial spiral
-            starts out (larger is looser)
-        b: how loosely coiled the spiral is
-            (larger is looser)
+        a: how loose the initial spiral starts out (larger is looser)
+        b: how loosely coiled the spiral is (larger is looser)
         t: turtle
     """
 

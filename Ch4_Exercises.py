@@ -10,7 +10,7 @@ bob = turtle.Turtle()  # Used for all exercises.
 
 
 def square(t):
-    for i in range(4):
+    for _ in range(4):
         t.fd(100)
         t.lt(90)
 
@@ -23,7 +23,7 @@ def square(t):
 # length.
 
 def square_2(t, length):
-    for i in range(4):
+    for _ in range(4):
         t.fd(length)
         t.lt(90)
 
@@ -35,7 +35,7 @@ def square_2(t, length):
 # draws an n_sided regular polygon.
 
 def polygon(t, length, n):
-    for i in range(n):
+    for _ in range(n):
         t.fd(length)
         t.lt(360 / n)
 
@@ -50,7 +50,7 @@ def polygon(t, length, n):
 def circle(t, r):
     n_sides = 200
     length_sides = (2 * math.pi * r) / n_sides
-    for i in range(n_sides):
+    for _ in range(n_sides):
         t.fd(length_sides)
         t.lt(360 / n_sides)
 
@@ -67,7 +67,7 @@ def arc(t, r, angle):
     length_sides = (2 * math.pi * r) / n_sides
     n_arc_sides = int(n_sides / 360 * angle)
 
-    for i in range(n_arc_sides):
+    for _ in range(n_arc_sides):
         t.fd(length_sides)
         t.lt(360 / n_sides)
 
@@ -84,7 +84,7 @@ def pie(t, r, angle):
 
     t.fd(r)
     t.lt(90)
-    for i in range(n_arc_sides):
+    for _ in range(n_arc_sides):
         t.fd(length_sides)
         t.lt(360 / n_sides)
     t.lt(90)

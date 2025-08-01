@@ -6,7 +6,6 @@
 minutes = 42
 seconds = 42
 answer = minutes * 60 + seconds
-print(answer)
 
 # Expanded solution including user input:
 minutes = int(input("Enter minutes: "))
@@ -38,8 +37,8 @@ distance_miles = distance_km / 1.6
 minutes_to_seconds = t_minutes * 60
 
 # Calculating pace.
-pace_minutes = int((minutes_to_seconds) / distance_miles // 60)
-pace_seconds = int((minutes_to_seconds) / distance_miles % 60)
+pace_minutes = int(minutes_to_seconds / distance_miles // 60)
+pace_seconds = int(minutes_to_seconds / distance_miles % 60)
 print(f"Pace (time per mile) is {pace_minutes}:{pace_seconds}.")
 
 # Calculating average speed.
