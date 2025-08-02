@@ -82,6 +82,53 @@ def n_most_common_words(text, encode="utf8"):
     return sorted_words[:20]
 
 
-# Exercise 13-4: Modify the previous program to read a word list (use 'Ch9_words.txt') and then print all the words in
-# the book that are not in the word list. How many of them are typos? How many of them are common words that should be
+"""
+# NOTE: I took a break here for about two years. So if my overall style changed a bit it's because I am not completely
+# useless anymore when it comes to coding... just mostly useless ;) I will try to come up with solutions that are as
+# close as possible to what the book would expect you to do. The alternative solutions provided will probably be a bit
+# better than the ones I did previously... at least I hope. Would be embarrassing if I learned jack-shit over the past
+# years. Anyway, enjoy!
+# --- René
+"""
+
+
+# Exercise 13-4: Modify the previous program to read a word list (use 'Chapter_9_words.txt') and then print all the words
+# in the book that are not in the word list. How many of them are typos? How many of them are common words that should be
 # in the word list and how many of them are really obscure?
+
+def check_book_words(word_list, book):
+    """Check for and print out words from 'book' that don't appear in list 'word_list'.
+    NOTE: this is a very basic version that does not clean the output from things like contractions, numbers or symbols
+    to keep the basic logic clear.
+    ARGS:
+        word_list: txt file containing words for checks.
+        book: txt file containing a book.
+    """
+    check_words = get_words(word_list)
+    book_words = get_words(book)
+    word_dict = {}
+
+    for word in book_words:
+        if word not in check_words:
+            word_dict[word] = None
+
+    for key in word_dict.keys():
+        print(key)
+
+
+# Alternative solution using sets for improved performance.
+def check_book_words_alternative(word_list, book):
+    """Check for and print out words from 'book' that don't appear in list 'word_list'.
+    NOTE: this is a very basic version that does not clean the output from things like contractions, numbers or symbols
+    to keep the basic logic clear.
+    ARGS:
+        word_list: txt file containing words for checks.
+        book: txt file containing a book.
+    """
+    check_words = set(get_words(word_list))
+    book_words = set(get_words(book))
+
+    word_set = book_words - check_words
+
+    for word in word_set:
+        print(word)

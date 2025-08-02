@@ -135,7 +135,7 @@ def find_metathesis_pairs(file):
 #    removing one letter. These are the "children" of the word.
 # 2. Recursively, a word is reducible if any of its children are reducible. As a base case, you can consider the empty
 #    string reducible.
-# 3. The wordlist I provided, "Ch9_words.txt", doesn't contain single letter words. So you might want to add "I", "a"
+# 3. The wordlist I provided, "Chapter_9_words.txt", doesn't contain single letter words. So you might want to add "I", "a"
 #    and the empty string.
 # 4. To improve the performance of your program, you might want to memoize the words that are known to be reducible.
 

@@ -1,8 +1,8 @@
-# Exercise 11-1: Write a function that reads words in 'Ch9_words.txt' and stores them as keys in a dictionary. It
+# Exercise 11-1: Write a function that reads words in 'Chapter_9_words.txt' and stores them as keys in a dictionary. It
 # doesn't matter what the values are. Then you use the in operator as a fast way to check whether a string is in the
 # dictionary.
 
-words = "Ch9_words.txt"
+words = "Chapter_9_words.txt"
 
 
 def build_words_dict(file):

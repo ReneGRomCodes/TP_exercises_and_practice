@@ -1,9 +1,9 @@
-# Exercise 9-1: Write a program that reads 'Ch9_words.txt' and print only the words with more than 20 characters (not
+# Exercise 9-1: Write a program that reads 'Chapter_9_words.txt' and print only the words with more than 20 characters (not
 # counting whitespace).
 
 def print_words_20_char():
-    """Check 'Ch9_words.txt' for words with more than 20 characters and print them."""
-    with open("Ch9_words.txt") as f:
+    """Check 'Chapter_9_words.txt' for words with more than 20 characters and print them."""
+    with open("Chapter_9_words.txt") as f:
         for line in f:
             word = line.strip()
             if len(word) >= 20:
@@ -24,9 +24,9 @@ def has_no_e(s):
 
 
 def print_no_e():
-    """Check 'Ch9_words.txt' for without the letter 'e', print them and calculate the percentage of words without the
+    """Check 'Chapter_9_words.txt' for without the letter 'e', print them and calculate the percentage of words without the
     letter 'e'."""
-    with open("Ch9_words.txt") as f:
+    with open("Chapter_9_words.txt") as f:
         # Declare starting values for word count variables.
         word_count = 0
         word_count_no_e = 0
@@ -64,13 +64,13 @@ def avoids(s1, s2):
 
 
 def avoids_user():
-    """Prompt the user for a string of 'forbidden letters' and check words 'Ch9_words.txt' for occurrence. Print the
+    """Prompt the user for a string of 'forbidden letters' and check words 'Chapter_9_words.txt' for occurrence. Print the
     amount of words not containing the 'forbidden letters'."""
     forbidden_letters = input("Enter series of 'forbidden letters': ")
     # Start counter with value of 0.
     word_count = 0
 
-    with open("Ch9_words.txt") as f:
+    with open("Chapter_9_words.txt") as f:
         for line in f:
             if avoids(line, forbidden_letters):
                 word_count += 1
@@ -119,7 +119,7 @@ def uses_all(s1, s2):
 word_count_1 = 0
 word_count_2 = 0
 
-with open("Ch9_words.txt") as f:
+with open("Chapter_9_words.txt") as f:
     for line in f:
         if uses_all(line, "aeiou"):
             word_count_1 += 1
@@ -149,8 +149,8 @@ def is_abecedarian(word):
 # Exercise 9-7: Car Talk Puzzler (see book).
 
 def find_word():
-    """Find and print all words with three consecutive double letters in 'Ch9_words.txt'."""
-    with open("Ch9_words.txt") as f:
+    """Find and print all words with three consecutive double letters in 'Chapter_9_words.txt'."""
+    with open("Chapter_9_words.txt") as f:
         for line in f:
             n = 0
             while n < (len(line) - 5):
