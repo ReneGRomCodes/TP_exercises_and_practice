@@ -1,7 +1,9 @@
+import string
+import random
+
+
 # Exercise 13-1: Write a program that reads a file, breaks each line into words, strips whitespace and punctuation from
 # the words and converts them to lowercase.
-import string
-
 
 def get_words(text, encode="utf8"):
     """Return a list of words from file 'text'. Default text encoding is "utf8"."""
@@ -132,3 +134,50 @@ def check_book_words_alternative(word_list, book):
 
     for word in word_set:
         print(word)
+
+
+# Exercise 13-5: Write a function named 'choose_from_hist' that takes a histogram as defined in 'Dictionary as a Collection
+# of Counter' on page 127 and returns a random value from the histogram, chosen with probability in proportion to frequency.
+
+# Histogram function from page 127:
+def histogram(s):
+    """Takes string 's' and creates a histogram with the frequency of each letter.
+    ARGS:
+    s: string for histogram.
+    """
+    d = dict()
+
+    for c in s:
+        if c not in d:
+            d[c] = 1
+        else:
+            d[c] += 1
+
+    return d
+
+
+def choose_from_hist(s):
+    """Takes string 's', creates a histogram and chooses a random value with probability in proportion to frequency.
+    ARGS:
+    s: string.
+    """
+    h = histogram(s)
+    h_list = []
+
+    for key, value in h.items():
+        for _ in range(value):
+            h_list.append(key)
+
+    print(random.choice(h_list))
+
+
+def choose_from_hist_alternative(s):
+    """Alternative using 'random.choices()' method."""
+    h = histogram(s)
+
+    print(random.choices(population=list(h.keys()), weights=list(h.values())))
+
+
+# Exercise 13-6: Write a program that uses set subtraction to find words in the book that not in the word list.
+
+# See alternative solution for exercise 13-4. Accidentally solved this one already. ;)
