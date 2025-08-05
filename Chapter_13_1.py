@@ -32,10 +32,8 @@ def get_words(text, encode="utf8"):
 def get_words_2(text, encode="utf8"):
     """Return a list of words from file 'text'. Default text encoding is "utf8". Adjusted to work with text files from
     "Project Gutenberg"."""
-
-    stripped = string.punctuation
-
-    stripped += string.whitespace
+    punct = string.punctuation
+    out = " " * len(punct)
 
     opened_text = open(text, 'r', encoding=encode)
     t = []
@@ -52,8 +50,11 @@ def get_words_2(text, encode="utf8"):
         # return word list once boilerplate has been reached
         elif end in line and flag == True:
             return t
-        else:
-            pass
+
+        elif flag:
+            translation = line.maketrans(punct, out)
+            for word in line.translate(translation).split():
+                t.append(word.strip().lower())
 
     return t
 
