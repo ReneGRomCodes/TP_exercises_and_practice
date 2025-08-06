@@ -1,4 +1,5 @@
 import string
+import random
 
 
 # Exercise 13-8: Markov Analysis.
@@ -64,3 +65,67 @@ def markov_analysis(text, depth):
             prefix_suffix_dict[prefix].append(word_list[index+depth])
 
     return prefix_suffix_dict
+
+
+# Alternative using dicts of suffix frequencies.
+def markov_analysis_alternative(text, depth):
+    """Return a dictionary mapping prefixes to dicts of suffix frequencies from a given text file.
+    ARGS:
+        text: Path to the text file to analyze.
+        depth: Integer representing number of words to use as the prefix.
+    RETURNS:
+        Dictionary where each key is a prefix (string of 'depth' words), and each value is a dict of suffix frequencies
+        that follow that prefix.
+    """
+    prefix_suffix_dict = {}
+    word_list = get_words(text)
+
+    for index, word in enumerate(word_list):
+        # Break loop when prefix has no suffix at the end of the list to avoid index error.
+        if index == len(word_list) - depth:
+            break
+
+        else:
+            prefix = ' '.join(word_list[index:index + depth])
+            suffix = word_list[index + depth]
+
+            if prefix not in prefix_suffix_dict:
+                prefix_suffix_dict[prefix] = {}
+
+            if suffix not in prefix_suffix_dict[prefix]:
+                prefix_suffix_dict[prefix][suffix] = 1
+            else:
+                prefix_suffix_dict[prefix][suffix] += 1
+
+    return prefix_suffix_dict
+
+
+# 2. Add a function to the previous program to generate random text based on the Markov analysis.
+
+def generate_text(text, word_count=100, depth=6):
+    """Generate random text based on markov analysis of text file.
+    ARGS:
+        text: Path to the text file to analyze.
+        word_count: Number of words for output text. Default is 100.
+        depth: Integer representing number of words to use as the prefix. Default is 6.
+    RETURNS:
+        text_output: randomly generated string.
+    """
+    prefix_suffix_dict = markov_analysis(text, depth)
+    prefix = ""
+    suffix = ""
+    text_output = ""
+
+    for _ in range(word_count):
+        # Build first text snippet for 'text_output'.
+        if not text_output:
+            prefix = random.choice(list(prefix_suffix_dict.keys()))
+            suffix = random.choice(prefix_suffix_dict[prefix])
+            text_output += f"{prefix} {suffix} "
+        # Build further string additions for 'text_output' by creating a new prefix based on previous suffix.
+        else:
+            prefix = f"{' '.join(prefix.split()[1:])} {suffix}"
+            suffix = random.choice(prefix_suffix_dict[prefix])
+            text_output += f"{suffix} "
+
+    return text_output
