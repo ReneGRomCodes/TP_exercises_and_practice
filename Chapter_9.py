@@ -3,7 +3,7 @@
 
 def print_words_20_char():
     """Check 'Chapter_9_words.txt' for words with more than 20 characters and print them."""
-    with open("Chapter_9_words.txt") as f:
+    with open("txt files/Chapter_9_words.txt") as f:
         for line in f:
             word = line.strip()
             if len(word) >= 20:
@@ -26,7 +26,7 @@ def has_no_e(s):
 def print_no_e():
     """Check 'Chapter_9_words.txt' for without the letter 'e', print them and calculate the percentage of words without the
     letter 'e'."""
-    with open("Chapter_9_words.txt") as f:
+    with open("txt files/Chapter_9_words.txt") as f:
         # Declare starting values for word count variables.
         word_count = 0
         word_count_no_e = 0
@@ -70,7 +70,7 @@ def avoids_user():
     # Start counter with value of 0.
     word_count = 0
 
-    with open("Chapter_9_words.txt") as f:
+    with open("txt files/Chapter_9_words.txt") as f:
         for line in f:
             if avoids(line, forbidden_letters):
                 word_count += 1
@@ -119,7 +119,7 @@ def uses_all(s1, s2):
 word_count_1 = 0
 word_count_2 = 0
 
-with open("Chapter_9_words.txt") as f:
+with open("txt files/Chapter_9_words.txt") as f:
     for line in f:
         if uses_all(line, "aeiou"):
             word_count_1 += 1
@@ -150,7 +150,7 @@ def is_abecedarian(word):
 
 def find_word():
     """Find and print all words with three consecutive double letters in 'Chapter_9_words.txt'."""
-    with open("Chapter_9_words.txt") as f:
+    with open("txt files/Chapter_9_words.txt") as f:
         for line in f:
             n = 0
             while n < (len(line) - 5):

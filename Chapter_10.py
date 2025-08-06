@@ -169,7 +169,7 @@ def birthday_paradox_exp(n):
 # element per word. Write two versions of the function, one using the 'append' method and other using the idiom
 # 't=t+[x]'. Which one takes longer to run and why?
 
-word_file = "Chapter_9_words.txt"
+word_file = "txt files/Chapter_9_words.txt"
 
 
 # Using Append method.
