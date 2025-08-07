@@ -1,5 +1,7 @@
 import string
 import random
+import matplotlib.pyplot as plt
+from math import log
 
 
 # Exercise 13-8: Markov Analysis.
@@ -163,10 +165,10 @@ def markov_analysis_multi(prefix_suffix_dict, text, depth):
     return prefix_suffix_dict
 
 
-def generate_text_multi(texts, word_count=100, depth=6):
-    """Generate random text based on markov analysis of text file.
+def generate_text_multi(texts=TEXT_LIST, word_count=100, depth=6):
+    """Generate random text based on markov analysis of text files.
     ARGS:
-        texts: list or tuple of text files to analyze.
+        texts: list or tuple of text files to analyze. Default is 'TEXT_LIST'.
         word_count: Number of words for output text. Default is 100.
         depth: Integer representing number of words to use as the prefix. Default is 6.
     RETURNS:
@@ -194,3 +196,74 @@ def generate_text_multi(texts, word_count=100, depth=6):
             text_output += f"{suffix} "
 
     return text_output
+
+
+# Exercise 13-9: Write a program that reads a text from a file, counts word frequencies and prints one line for each word,
+# in descending order of frequency, with log f and log r. Use the graphing program of your choice to plot the result and
+# check whether they form a straight line.
+
+def get_bag_of_words(text):
+    """Create 'bag of word' dict from text and return it as list of tuples.
+    ARGS:
+        text: Path to the text file to analyze.
+    RETURNS:
+        bag of words as list of tuples.
+    """
+    bag_of_words = {}
+    words = get_words(text)
+
+    # Map each word as key to frequency in dictionary.
+    for word in words:
+        if word not in bag_of_words:
+            bag_of_words[word] = 1
+        else:
+            bag_of_words[word] += 1
+
+    # Turn dict into list of tuples with each tuple having the key at index 0 and frequency at index 1 and return.
+    return sorted(bag_of_words.items(), key=lambda item: item[1], reverse=True)
+
+
+def print_zipf(text):
+    """Apply Zipf's law to text and print result.
+    ARGS:
+        text: Path to the text file to analyze.
+    """
+    # Get bag of words for word-frequency pairs.
+    bag_of_words = get_bag_of_words(text)
+
+    # Print header.
+    print(f"{"WORD":<20}{"COUNT":<8}{"LOG F":<10}{"LOG R"}")
+
+    # Loop over each item in 'bag_of_words' and print word, frequency and logs in formatted output
+    for index, word in enumerate(bag_of_words):
+        rank = index + 1
+        entry = f"{word[0]}:"
+        frequency = f"{word[1]}"
+        log_f = log(word[1])
+        log_r = log(rank)
+
+        print(f"{entry:<20}{frequency:<8}{log_f:<10.4f}{log_r:.4f}")
+
+
+def plot_zipf(text):
+    """Apply Zipf's law to text and display result as scatter plot.
+    ARGS:
+        text: Path to the text file to analyze.
+    """
+    # Get bag of words for word-frequency pairs and lists for 'log f's and 'log r's.
+    bag_of_words = get_bag_of_words(text)
+    log_f_list = []
+    log_r_list = []
+
+    # Populate lists with log f and log r for each word in bag of words.
+    for index, word in enumerate(bag_of_words):
+        rank = index + 1
+        log_f_list.append(log(word[1]))
+        log_r_list.append(log(rank))
+
+    plt.xlabel("log(Rank)")
+    plt.ylabel("log(Frequency)")
+    plt.title("Zipf's Law Plot")
+    # Create and display scatter plot from log lists.
+    plt.scatter(log_r_list, log_f_list)
+    plt.show()
