@@ -67,7 +67,6 @@ def find_anagrams_sorted(file):
     RETURNS:
         list(number of anagrams formed, letters used, anagrams)
     """
-
     anagrams = find_anagrams(file)
     longest_list_anagrams = []
 
@@ -81,17 +80,16 @@ def find_anagrams_sorted(file):
 #    eight-letter word. What collection of eight letters forms the most possible bingos'?
 
 def find_most_scrabble_bingos(file):
-    """
-    Take text from 'file' and return list with tuples that form possible bingos in decreasing order of frequency of
+    """Take text from 'file' and return list with tuples that form possible bingos in decreasing order of frequency of
     anagrams formed.
-    First item: number of anagrams formed.
-    Seconds item: letters used.
-    Third item: anagrams.
+    ARGS:
+        file: path to file to process.
+    RETURNS:
+        list(number of anagrams formed, letters used, anagrams)
     """
-
     sorted_anagrams_list = find_anagrams_sorted(file)
-
     bingos = []
+
     for l, k, v in sorted_anagrams_list:
         if len(k) == 8:
             bingos.append((l, k, v))
@@ -103,7 +101,13 @@ def find_most_scrabble_bingos(file):
 # example, "converse" and "conserve". Write a program that finds all the metathesis pairs in the dictionary.
 
 def calculate_difference(word1, word2):
-    """Calculate the number of different characters in 'word1' and 'word2'."""
+    """Calculate the number of different characters in 'word1' and 'word2'.
+    ARGS:
+        word1: strings to check for differences.
+        word2: strings to check for differences.
+    RETURNS:
+        number of different characters.
+    """
     if len(word1) != len(word2):
         raise ValueError("Words must be the same length.")
 
@@ -116,14 +120,15 @@ def calculate_difference(word1, word2):
 
 
 def find_metathesis_pairs(file):
-    """Take words from file 'file' and return a list of metathesis pairs 'word_pairs'."""
-
-    # Make anagrams.
+    """Take words from file 'file' and return a list of metathesis pairs 'word_pairs'.
+    ARGS:
+        file: path to file to process.
+    RETURNS:
+        list of metathesis pairs.
+    """
     anagrams = find_anagrams(file)
-
     word_pairs = []
 
-    # Cycle through the tuples of anagrams and pull out words which only differ by two letters.
     for length, letter, ana in anagrams:
         for i in range(len(ana)):
             for j in range(i + 1, len(ana)):
