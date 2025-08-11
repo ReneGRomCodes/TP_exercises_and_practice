@@ -111,7 +111,6 @@ def read_anagrams(word, file):
         return list(shelf[sorted_word])
 
 
-
 # Exercise 14-3: In a large collection of MP3 files, there may be more than one copy of the same song, stored in different
 # directories or with different filenames. The goal of this exercise is to search for duplicates.
 # 1. Write a program that searches a directory and all of its subdirectories, recursively, and returns a list of complete

@@ -1,23 +1,29 @@
-# I Struggled a bit with the following exercises, so I relied heavily on the solutions from GitHub user STRZGR
-# (https://github.com/STRZGR) to figure them out. His solutions are more comprehensive than the ones here, so I
-# recommend checking out his repository on "Think Python": https://github.com/STRZGR/ThinkPython
-
-
 # Exercise 12-1: Write a function called 'most_frequent' that takes a string and prints the letters in decreasing order
 # of frequency. Find text samples from several different languages and see how letter frequency varies between
 # languages.
 
+
 def most_frequent(text):
-    """Take a string 'text' and print the letters in decreasing order of frequency with percentage their percentage."""
-    d = {}
+    """Take a string 'text' and print the letters in decreasing order of frequency with their percentage.
+    ARGS:
+        text: string to be processed.
+    """
+    histogram = {}
 
     for s in text:
-        if s.isalpha():
-            s = s.lower()
-            d[s] = 1 + d.get(s, 0)
+        s = s.lower()
+        alpha = s.isalpha()
 
-    for (y, z) in reversed(sorted(zip(d.values(), d.keys()))):
-        print("'{}': {:.3f}%".format(z, (y / len(text)) * 100))
+        if alpha and s not in histogram:
+            histogram[s] = 1
+        elif s in histogram:
+            histogram[s] += 1
+
+    s_sum = sum(histogram.values())
+    sorted_frequency = reversed(sorted(zip(histogram.values(), histogram.keys())))
+
+    for letter, value in sorted_frequency:
+        print(f"{letter}: {(value / s_sum) * 100:.2f}%")
 
 
 # Exercise 12-2: More anagrams!
@@ -25,42 +31,41 @@ def most_frequent(text):
 
 def sort_letters(s):
     """Take string 's' and return new string in alphabetical order."""
-
     return ''.join(sorted(list(s.lower())))
 
 
 def find_anagrams(file):
-    """Take text from 'file' and return list of tuples of anagrams.
+    """Take text from 'file' and return dict of anagrams.
+    ARGS:
+        file: path to the file to process.
     RETURNS:
-        anagrams
+        anagrams_dict
     """
+    anagrams_dict = dict()
 
-    sorted_dict = {}
+    with open(file, "r") as f:
+        text = f.read()
+        words_set = set(text.split())
 
-    for line in file:
-        orig_word = line.strip()
-        sorted_word = sort_letters(orig_word)
-        sorted_dict.setdefault(sorted_word, []).append(orig_word)
+        for word in words_set:
+            sorted_word = sort_letters(word)
+            if sorted_word not in anagrams_dict:
+                anagrams_dict[sorted_word] = {word}
+            else:
+                anagrams_dict[sorted_word].add(word)
 
-    anagrams = []
-
-    for k, v in sorted_dict.items():
-        l = len(v)
-        if l > 1:
-            anagrams.append((l, k, v))
-
-    return anagrams
+    return anagrams_dict
 
 
 # 2. Modify the previous program so that it prints the longest list of anagrams first, followed by the second longest,
 #    and so on.
 
 def find_anagrams_sorted(file):
-    """
-    Takes text from 'file' and return a list of tuples of anagrams in decreasing order of frequency.
-    First item: number of anagrams formed.
-    Seconds item: letters used.
-    Third item: anagrams.
+    """Takes text from 'file' and return a list of tuples of anagrams in decreasing order of frequency.
+    ARGS:
+        file: path to file to process.
+    RETURNS:
+        list(number of anagrams formed, letters used, anagrams)
     """
 
     anagrams = find_anagrams(file)
