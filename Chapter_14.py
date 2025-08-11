@@ -118,3 +118,60 @@ def read_anagrams(word, file):
 #    file- and path names.
 # 2. To recognize duplicates, you can use 'md5sum' to compute a checksum for each file.
 # 3. To double-check, you can use the Unix command 'diff'.
+import os
+
+def find_files(suffix, path):
+    """Find all files with given suffix in directory and subdirectories.
+    ARGS:
+        suffix: File extension to match.
+        path: Directory path to search.
+    RETURNS:
+        list of str: Full file paths matching suffix.
+    """
+    result = []
+
+    for entry in os.listdir(path):
+        full_path = path + '/' + entry
+        if os.path.isdir(full_path):
+            result.extend(find_files(suffix, full_path))
+        else:
+            if entry.endswith(suffix):
+                result.append(full_path)
+
+    return result
+
+def md5_checksum(filename):
+    """Compute MD5 checksum of a file by calling external md5sum command.
+    ARGS:
+        filename: Path to file.
+    RETURNS:
+        Hex MD5 checksum string.
+    """
+    cmd = 'md5sum ' + filename
+    f = os.popen(cmd)
+    result = f.read()
+    f.close()
+    checksum = result.split()[0]
+
+    return checksum
+
+def find_duplicates(suffix, path):
+    """Find duplicate files by checksum.
+    ARGS:
+        suffix: File extension to match.
+        path: Directory path to search.
+    RETURNS:
+        list of tuples: (original_file, duplicate_file)
+    """
+    files = find_files(suffix, path)
+    checksums = {}
+    duplicates = []
+
+    for file in files:
+        checksum = md5_checksum(file)
+        if checksum in checksums:
+            duplicates.append((checksums[checksum], file))
+        else:
+            checksums[checksum] = file
+
+    return duplicates
