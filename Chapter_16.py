@@ -71,7 +71,6 @@ def race_time(t, distance):
     return pace
 
 
-
 # Exercise 16-2: The datetime module provides time objects that are similar to the Time objects in this chapter, but they
 # provide a rich set of methods and operators. Read the documentation at http://docs.python.org/3/library/datetime.html.
 # 1. Use the datetime module to write a program that gets the current date and prints the day of the week.
@@ -81,3 +80,80 @@ def race_time(t, distance):
 #    Write a program that takes two birthdays and computes their Double Day.
 # 4. for a little more challenge, write the more general version that computes the day when one is n times older than
 #    the other.
+from datetime import datetime
+
+
+# 1.
+now = datetime.now()
+print(now.strftime("%A"))  # Prints full weekday name, e.g., 'Tuesday'
+
+# 2.
+def birthday_info(birthday_str):
+    """Take a datetime.date object representing a birthday and print:
+    - The user's current age in years.
+    - Time left until next birthday in days, hours, minutes, and seconds.
+    ARGS:
+        birthday_str (datetime.date): The user's birthday.
+    """
+    birthday = datetime.strptime(birthday_str, "%Y-%m-%d")
+    today = datetime.now()
+
+    # Calculate age
+    age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
+
+    # Next birthday this year or next
+    next_birthday = birthday.replace(year=today.year)
+    if next_birthday < today:
+        next_birthday = next_birthday.replace(year=today.year + 1)
+
+    delta = next_birthday - today
+
+    days = delta.days
+    seconds = delta.seconds
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    seconds = seconds % 60
+
+    print(f"Age: {age}")
+    print(f"Time until next birthday: {days} days, {hours} hours, {minutes} minutes, {seconds} seconds")
+
+# 3.
+def double_day(bday1_str, bday2_str):
+    """Calculate and return the date when one person is exactly twice as old as the other.
+    Args:
+        bday1_str (datetime.date): Birthday of first person.
+        bday2_str (datetime.date): Birthday of second person.
+    Returns:
+        datetime.date: The 'Double Day'.
+    """
+    bday1 = datetime.strptime(bday1_str, "%Y-%m-%d")
+    bday2 = datetime.strptime(bday2_str, "%Y-%m-%d")
+
+    if bday1 > bday2:
+        bday1, bday2 = bday2, bday1  # Ensure bday1 is older
+
+    diff = bday2 - bday1
+    double_day = bday2 + diff  # When younger is as old as twice older
+
+    return double_day.strftime("%Y-%m-%d")
+
+# 4.
+def nth_day(bday1_str, bday2_str, n):
+    """Calculates and return the date when one person is n times as old as the other.
+    Args:
+        bday1_str (datetime.date): Birthday of first person.
+        bday2_str (datetime.date): Birthday of second person.
+        n (float): The age multiple (e.g., 2 for double, 3 for triple).
+    Returns:
+        datetime.date: The day when one is n times older than the other.
+    """
+    bday1 = datetime.strptime(bday1_str, "%Y-%m-%d")
+    bday2 = datetime.strptime(bday2_str, "%Y-%m-%d")
+
+    if bday1 > bday2:
+        bday1, bday2 = bday2, bday1  # Older first
+
+    diff = bday2 - bday1
+    nth_day = bday2 + diff * (n - 1)
+
+    return nth_day.strftime("%Y-%m-%d")
