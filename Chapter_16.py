@@ -120,10 +120,10 @@ def birthday_info(birthday_str):
 # 3.
 def double_day(bday1_str, bday2_str):
     """Calculate and return the date when one person is exactly twice as old as the other.
-    Args:
+    ARGS:
         bday1_str (datetime.date): Birthday of first person.
         bday2_str (datetime.date): Birthday of second person.
-    Returns:
+    RETURNS:
         datetime.date: The 'Double Day'.
     """
     bday1 = datetime.strptime(bday1_str, "%Y-%m-%d")
@@ -140,11 +140,11 @@ def double_day(bday1_str, bday2_str):
 # 4.
 def nth_day(bday1_str, bday2_str, n):
     """Calculates and return the date when one person is n times as old as the other.
-    Args:
+    ARGS:
         bday1_str (datetime.date): Birthday of first person.
         bday2_str (datetime.date): Birthday of second person.
         n (float): The age multiple (e.g., 2 for double, 3 for triple).
-    Returns:
+    RETURNS:
         datetime.date: The day when one is n times older than the other.
     """
     bday1 = datetime.strptime(bday1_str, "%Y-%m-%d")
