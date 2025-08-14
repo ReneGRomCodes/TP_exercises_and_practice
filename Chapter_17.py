@@ -28,6 +28,7 @@ class Kangaroo:
 
     def __str__(self):
         return f"{self.pouch_contents}"
+        # return ", ".join(str(item) for item in self.pouch_contents)  # Alternative output format.
 
     def put_in_pouch(self, item):
         self.pouch_contents.append(item)
