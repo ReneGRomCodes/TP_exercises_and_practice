@@ -145,8 +145,85 @@ def find_metathesis_pairs(file):
 #    removing one letter. These are the "children" of the word.
 # 2. Recursively, a word is reducible if any of its children are reducible. As a base case, you can consider the empty
 #    string reducible.
-# 3. The wordlist I provided, "Chapter_9_words.txt", doesn't contain single letter words. So you might want to add "I",
-#    "a" and the empty string.
-# 4. To improve the performance of your program, you might want to memoize the words that are known to be reducible.
+# 3. To improve the performance of your program, you might want to memoize the words that are known to be reducible.
+words_source_file = "txt files/Chapter_9_words.txt"
 
-# TODO I'll come back to this one later. Turns out to be way more complicated than I first thought.
+
+def get_words_set(file):
+    """Build set of words from file.
+    ARGS:
+        file: path to text file.
+    RETURNS:
+        set of words from source file.
+    """
+    with open(file) as f:
+        text = f.read()
+        return set(text.split())
+
+
+def get_reduced_words_dict():
+    """Build and return dict with words from 'txt files/Chapter_9_words.txt' that can be reduced as keys and list of
+    children words as values.
+    RETURNS:
+        dict: reducible words as keys, list of children words as values.
+    """
+    reduced_words = dict()
+
+    for word in WORDS_SET:
+        reduced_words[word] = []
+
+        for index, letter in enumerate(word):
+            red_word = word[:index] + word[index+1:]
+
+            if red_word in WORDS_SET:
+                reduced_words[word].append(red_word)
+
+        # Remove empty entries from reduced_words.
+        if len(reduced_words[word]) == 0:
+            del reduced_words[word]
+
+    return reduced_words
+
+
+# Constants storing reduced words dictionary and words set for source file to avoid building them every time from within
+# further functions.
+WORDS_SET = get_words_set(words_source_file)
+REDUCED_WORDS_DICT = get_reduced_words_dict()
+
+
+def check_word_reducible(word):
+    """Check if string is a reducible word.
+    ARGS:
+        word: string
+    RETURNS:
+        REDUCED_WORDS_DICT entry if 'word' is reducible, message string if not.
+    """
+    return REDUCED_WORDS_DICT[word] if word.lower() in REDUCED_WORDS_DICT else f"'{word}' can't be reduced."
+
+
+def get_true_reducible_words_set():
+    """Build set of words that are truly reducible, meaning if any of the children words are reducible themselves.
+    RETURNS:
+        Set of truly reducible words.
+    """
+    true_reduced_words = set()
+
+    for k, v in REDUCED_WORDS_DICT.items():
+        for index, word in enumerate(v):
+            red_word = word[:index] + word[index+1:]
+
+            if red_word in WORDS_SET:
+                true_reduced_words.add(k)
+                break
+
+    return true_reduced_words
+
+
+def check_true_word_reducible(word):
+    """Check if string is a truly reducible word, meaning if any of the children words are reducible themselves.
+    ARGS:
+        word: string
+    RETURNS:
+        bool
+    """
+    return True if word.lower() in get_true_reducible_words_set() else False
