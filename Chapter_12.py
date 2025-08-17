@@ -191,16 +191,6 @@ WORDS_SET = get_words_set(words_source_file)
 REDUCED_WORDS_DICT = get_reduced_words_dict()
 
 
-def check_word_reducible(word):
-    """Check if string is a reducible word.
-    ARGS:
-        word: string
-    RETURNS:
-        REDUCED_WORDS_DICT entry if 'word' is reducible, message string if not.
-    """
-    return REDUCED_WORDS_DICT[word] if word.lower() in REDUCED_WORDS_DICT else f"'{word}' can't be reduced."
-
-
 def get_true_reducible_words_set():
     """Build set of words that are truly reducible, meaning if any of the children words are reducible themselves.
     RETURNS:
@@ -219,11 +209,61 @@ def get_true_reducible_words_set():
     return true_reduced_words
 
 
-def check_true_word_reducible(word):
-    """Check if string is a truly reducible word, meaning if any of the children words are reducible themselves.
+def build_longest_word_chain(word, memo={}):
+    """Memoize the longest word chain for given word.
     ARGS:
-        word: string
+        word: string to find the longest word chain for.
+        memo: dict to memoize word chains. Do not pass a value for it as it will be a shared variable for all words!
     RETURNS:
-        bool
+        full_chain: list of strings showing the longest chain of reducible words.
     """
-    return True if word.lower() in get_true_reducible_words_set() else False
+    # Base case: single letter words are trivially reducible.
+    if len(word) == 1:
+        return [word]
+
+    # Check memo.
+    if word in memo:
+        return memo[word]
+
+    longest_subchain = []
+    for child in REDUCED_WORDS_DICT.get(word, []):
+        chain = build_longest_word_chain(child, memo)
+
+        if len(chain) > len(longest_subchain):
+            longest_subchain = chain
+
+    # Prepend the current word to the longest subchain.
+    full_chain = [word] + longest_subchain
+    memo[word] = full_chain
+
+    return full_chain
+
+
+def build_chain_dict():
+    """Build and return dictionary with the longest word chains for any reducible word.
+    RETURNS:
+        word_chains: dict of reducible word chains.
+    """
+    true_reduced_words = get_true_reducible_words_set()
+    word_chains = dict()
+
+    for word in true_reduced_words:
+        word_chains[word] = build_longest_word_chain(word)
+
+    return word_chains
+
+
+def find_longest_chains():
+    """Build and return a list with the longest reducible word chains.
+    RETURNS:
+        longest_chains: list of lists containing the longest reducible word chains from source text.
+    """
+    word_chains_dict = build_chain_dict()
+    max_chain_length = len(max(word_chains_dict, key=lambda w: len(word_chains_dict[w])))
+    longest_chains = []
+
+    for k, v in word_chains_dict.items():
+        if len(v) == max_chain_length:
+            longest_chains.append(word_chains_dict[k])
+
+    return longest_chains
